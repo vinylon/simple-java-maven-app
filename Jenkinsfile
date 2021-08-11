@@ -30,8 +30,7 @@ pipeline {
             }
             success {
                echo "单元测试成功"
-               def files = sh 'ls target/surefire-reports'
-               echo files
+               sh 'ls target/surefire-reports'
                emailext (
                     attachmentsPattern: "target/surefire-reports/*.txt",
                     subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
