@@ -9,8 +9,15 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''mvn -v
-mvn -B -DskipTests clean package'''
+        sh 'mvn -B -DskipTests clean package'
+      }
+      post {
+        success {
+            echo "构建成功"
+        }
+        failure {
+            echo "构建失败"
+        }
       }
     }
     stage('Test') {
@@ -21,8 +28,8 @@ mvn -B -DskipTests clean package'''
             always {
                 junit 'target/surefire-reports/*.xml'
             }
-
             success {
+               echo "单元测试成功"
                emailext (
                     subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                     body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
@@ -32,6 +39,7 @@ mvn -B -DskipTests clean package'''
                )
             }
             failure {
+                echo "单元测试失败"
                 emailext (
                     subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                     body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
