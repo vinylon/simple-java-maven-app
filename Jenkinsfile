@@ -62,8 +62,8 @@ pipeline {
                                                          summary: 'New JIRA Created from Jenkins.',
                                                          description: 'New JIRA Created from Jenkins.',
                                                          issuetype: [name: '故事']]], site: 'my-jira'
-                echo response.successful.toString()
-                echo response.data.toString()
+//                 echo response.successful.toString()
+//                 echo response.data.toString()
             }
         }
     }
