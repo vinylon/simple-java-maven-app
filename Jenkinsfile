@@ -53,7 +53,10 @@ pipeline {
         }
     }
     stage('JIRA') {
-        echo ${env.JIRA_SITE}
+        steps{
+            echo ${env.JIRA_SITE}
+        }
+
 //         withEnv(['JIRA_SITE=my-jira']) {
 //              def testIssue = [fields: [ project: [key: 'apm'],
 //              summary: 'New JIRA Created from Jenkins.',
