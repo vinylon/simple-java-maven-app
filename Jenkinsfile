@@ -39,6 +39,17 @@ pipeline {
                     to: "wei.ma@jhlinux.com",
                     from: "wei.ma@jhlinux.com"
                )
+               withEnv(['JIRA_SITE=my-jira']) {
+                     def testIssue = [fields: [ project: [key: 'apm'],
+                                                summary: 'New JIRA Created from Jenkins.',
+                                                description: 'New JIRA Created from Jenkins.',
+                                                issuetype: [name: '故事']]]
+
+                     response = jiraNewIssue issue: testIssue
+
+                     echo response.successful.toString()
+                     echo response.data.toString()
+                   }
             }
             failure {
                 echo "单元测试失败"
