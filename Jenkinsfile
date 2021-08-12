@@ -54,7 +54,7 @@ pipeline {
     }
     stage('JIRA') {
         steps{
-            echo ${env.JIRA_SITE}
+            echo "${env.JIRA_SITE}"
         }
 
 //         withEnv(['JIRA_SITE=my-jira']) {
