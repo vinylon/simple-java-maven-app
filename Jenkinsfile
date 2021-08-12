@@ -58,7 +58,7 @@ pipeline {
         }
         post {
             always {
-                jiraNewIssue issue: [fields: [ project: [key: 'apm'],
+                jiraNewIssue issue: [fields: [ project: [key: 'APM'],
                                                          summary: 'New JIRA Created from Jenkins.',
                                                          description: 'New JIRA Created from Jenkins.',
                                                          issuetype: [name: '故事']]], site: 'my-jira'
