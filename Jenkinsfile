@@ -49,7 +49,7 @@ pipeline {
 
                      echo response.successful.toString()
                      echo response.data.toString()
-                   }
+               }
             }
             failure {
                 echo "单元测试失败"
@@ -63,6 +63,21 @@ pipeline {
             }
         }
 
+    }
+    stage('JIRA') {
+        steps {
+            withEnv(['JIRA_SITE=my-jira']) {
+                 def testIssue = [fields: [ project: [key: 'apm'],
+                                            summary: 'New JIRA Created from Jenkins.',
+                                            description: 'New JIRA Created from Jenkins.',
+                                            issuetype: [name: '故事']]]
+
+                 response = jiraNewIssue issue: testIssue
+
+                 echo response.successful.toString()
+                 echo response.data.toString()
+           }
+        }
     }
     stage('Deliver') {
         steps {
