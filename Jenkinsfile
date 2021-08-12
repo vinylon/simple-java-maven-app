@@ -54,18 +54,16 @@ pipeline {
     }
     stage('JIRA') {
         steps{
-            echo "${env.JIRA_SITE}"
+            def testIssue = [fields: [ project: [key: 'apm'],
+                 summary: 'New JIRA Created from Jenkins.',
+                 description: 'New JIRA Created from Jenkins.',
+                 issuetype: [name: '故事']]]
+
+                 response = jiraNewIssue issue: testIssue, site: 'my-jira'
+
+                 echo response.successful.toString()
+                 echo response.data.toString()
         }
-
-         def testIssue = [fields: [ project: [key: 'apm'],
-         summary: 'New JIRA Created from Jenkins.',
-         description: 'New JIRA Created from Jenkins.',
-         issuetype: [name: '故事']]]
-
-         response = jiraNewIssue issue: testIssue, site: 'my-jira'
-
-         echo response.successful.toString()
-         echo response.data.toString()
     }
     stage('Deliver') {
         steps {
