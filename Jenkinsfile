@@ -56,10 +56,7 @@ pipeline {
     stage('JIRA') {
         steps {
             withEnv(['JIRA_SITE=my-jira']) {
-                 def testIssue = [fields: [ project: [key: 'apm'],
-                                            summary: 'New JIRA Created from Jenkins.',
-                                            description: 'New JIRA Created from Jenkins.',
-                                            issuetype: [name: '故事']]]
+                 def testIssue = [fields: [ project: [key: 'apm'], summary: 'New JIRA Created from Jenkins.',description: 'New JIRA Created from Jenkins.',issuetype: [name: '故事']]]
 
                  response = jiraNewIssue issue: testIssue
 
